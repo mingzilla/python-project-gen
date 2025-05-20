@@ -320,12 +320,6 @@ The generated shell script should:
 Please generate a complete shell script (extend_project.sh) based on these requirements. The script should be executable and follow best practices for shell scripting.
 EOL
 
-# Initialize git repository
-echo -e "${BLUE}Initializing git repository...${NC}"
-git init
-git add .
-git commit -m "Initial commit: Project structure generated"
-
 # Run unit tests
 echo -e "${BLUE}Running unit tests to verify the project...${NC}"
 # Install the package in development mode first
