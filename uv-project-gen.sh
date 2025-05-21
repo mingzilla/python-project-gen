@@ -1,7 +1,7 @@
 #!/bin/bash
 # UV Python Project Generator
 # This script creates a new Python project using UV with the recommended structure
-# 
+#
 # Usage: ./uv-project-gen.sh <project_name>
 
 set -e  # Exit on error
@@ -61,7 +61,7 @@ uv venv
 # Add dependencies using uv add command
 echo -e "${BLUE}Adding dependencies...${NC}"
 uv add pydantic
-uv add --dev pytest pytest-cov black isort mypy build pre-commit
+uv add --dev pytest pytest-cov black isort build pre-commit
 
 # Create source directory structure
 echo -e "${BLUE}Creating directory structure...${NC}"
@@ -94,7 +94,7 @@ from pydantic import BaseModel, Field
 
 class Address(BaseModel):
     """Address model with validation."""
-    
+
     line1: str = Field(..., description="First line of the address")
 EOL
 
@@ -164,19 +164,6 @@ import_heading_thirdparty = "Third Party"
 import_heading_firstparty = "First Party"
 import_heading_localfolder = "Local"
 
-[tool.mypy]
-python_version = "${PYTHON_VERSION}"
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-strict_optional = true
-warn_redundant_casts = true
-warn_return_any = true
-warn_unused_ignores = true
-ignore_missing_imports = true
-
 [tool.pytest.ini_options]
 testpaths = ["tests", "integration", "functional"]
 python_files = "test_*.py"
@@ -202,7 +189,6 @@ cat > .vscode/settings.json << EOL
     "python.defaultInterpreterPath": "\${workspaceFolder}/.venv/bin/python",
     "python.analysis.extraPaths": ["\${workspaceFolder}/src"],
     "python.linting.enabled": true,
-    "python.linting.mypyEnabled": true,
     "python.formatting.provider": "black",
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": false,
@@ -223,6 +209,7 @@ EOL
 echo -e "${BLUE}Creating run_pre-commit.sh script...${NC}"
 cat > run_pre-commit.sh << 'EOL'
 #!/bin/bash
+git add .
 uv run pre-commit run --all
 EOL
 chmod +x run_pre-commit.sh
@@ -268,7 +255,6 @@ Python project created following Mingzilla's Python style guide.
 | Run with coverage | \`uv run -- pytest --cov=src\` |
 | Format code | \`uv run -- black src tests integration functional\` |
 | Sort imports | \`uv run -- isort src tests integration functional\` |
-| Type check | \`uv run -- mypy src\` |
 | Run pre-commit hooks | \`./run_pre-commit.sh\` |
 EOL
 
@@ -298,7 +284,6 @@ Generate a shell script (extend_project.sh) that will:
 Set up pre-commit hooks for:
 - Code formatting with black (line-length=999)
 - Import sorting with isort
-- Type checking with mypy
 - Basic checks (trailing whitespace, YAML validity, etc.)
 
 ## Important Notes

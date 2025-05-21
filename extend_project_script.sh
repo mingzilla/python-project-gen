@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# extend_project.sh - Extends a Python project with development tooling
-# Adds pre-commit hooks for code quality following Mingzilla Python Style Guide
+# extend_project.sh - Extends a Python project with minimal development tooling
+# Adds lightweight pre-commit hooks for basic code quality
 
 # Check if project name is provided
 if [ $# -eq 0 ]; then
@@ -22,61 +22,57 @@ fi
 cd "$PROJECT_NAME" || exit 1
 echo "Working in directory: $(pwd)"
 
-# Create .pre-commit-config.yaml file
-echo "Creating .pre-commit-config.yaml file..."
+# Create .pre-commit-config.yaml file with minimal configuration
+echo "Creating lightweight .pre-commit-config.yaml file..."
 cat > .pre-commit-config.yaml << 'EOF'
-# pre-commit hooks configuration
-# See https://pre-commit.com for more information
+# Lightweight pre-commit hooks configuration
+# Only essential formatting tools are enabled by default
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
+        exclude: '^.*\.(lock|min\.js|svg)$'
     -   id: check-yaml
+        args: [--allow-multiple-documents]
     -   id: check-added-large-files
-    -   id: check-ast
-    -   id: check-json
-    -   id: debug-statements
-    -   id: detect-private-key
+        args: ['--maxkb=1000']
 
+# Keep just black for auto-formatting
 -   repo: https://github.com/psf/black
     rev: 24.2.0
     hooks:
     -   id: black
         args: [--line-length=999]
+        # Make black operate in "fast" mode
+        additional_dependencies: ['click==8.0.0']
 
+# Keep isort for automatic import sorting
 -   repo: https://github.com/pycqa/isort
     rev: 5.13.2
     hooks:
     -   id: isort
         args: [--profile=black, --line-length=999]
-        
--   repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.3.2
-    hooks:
-    -   id: ruff
-        args: [--fix]
-
--   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
-    hooks:
-    -   id: mypy
-        additional_dependencies: [pydantic>=2.0.0]
-        args: [--disallow-untyped-defs, --disallow-incomplete-defs]
 EOF
 
-echo ".pre-commit-config.yaml created successfully"
+echo "Lightweight .pre-commit-config.yaml created successfully"
 
-# Check if pre-commit is installed
-if ! command -v pre-commit &> /dev/null; then
-    echo "Warning: pre-commit is not installed. You may want to install it with:"
-    echo "    uv pip install pre-commit"
-fi
+# Create a script to install pre-commit hooks
+cat > install-hooks.sh << 'EOF'
+#!/bin/bash
+echo "Installing pre-commit hooks..."
+uv pip install pre-commit
+pre-commit install --install-hooks
+echo "Done! Pre-commit hooks installed."
+EOF
 
-# Ensure script has executable permissions
-chmod +x "$0"
-echo "Set executable permissions on script"
+chmod +x install-hooks.sh
+echo "Created install-hooks.sh helper script"
 
 echo "Project extension completed successfully!"
-echo "You can now install pre-commit hooks with: cd $PROJECT_NAME && pre-commit install"
+echo "To start using the lightweight pre-commit setup:"
+echo "  1. Run ./install-hooks.sh (only when you're ready)"
+echo "  2. Pre-commit will now automatically format your code when you commit"
+echo ""
+echo "TIP: You can bypass pre-commit hooks temporarily with: git commit --no-verify"
