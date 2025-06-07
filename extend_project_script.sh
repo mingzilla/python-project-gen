@@ -39,15 +39,6 @@ repos:
     -   id: check-added-large-files
         args: ['--maxkb=1000']
 
-# Keep just black for auto-formatting
--   repo: https://github.com/psf/black
-    rev: 24.2.0
-    hooks:
-    -   id: black
-        args: [--line-length=999]
-        # Make black operate in "fast" mode
-        additional_dependencies: ['click==8.0.0']
-
 # Keep isort for automatic import sorting
 -   repo: https://github.com/pycqa/isort
     rev: 5.13.2
