@@ -44,7 +44,7 @@ repos:
     rev: 5.13.2
     hooks:
     -   id: isort
-        args: [--profile=black, --line-length=999]
+        args: [--profile=google, --line-length=999]
 EOF
 
 echo "Lightweight .pre-commit-config.yaml created successfully"

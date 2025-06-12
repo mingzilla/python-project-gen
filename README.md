@@ -22,12 +22,13 @@ project_root/
 ├── .venv/                           # Virtual environment
 ├── src/                             # EXPLICIT SOURCE ROOT
 │   └── github_username/             # Top-level package (organization/username)
-│       ├── __init__.py
-│       ├── api/                     # FastAPI routes (Integration layer)
-│       ├── models/                  # Pydantic models
-│       ├── services/                # Business logic services
-│       ├── core/                    # Core functionality
-│       └── utils/                   # Utility functions and helpers
+│       └── api_link/                # PROJECT NAME (e.g., api_link, data_processor, web_scraper)
+│           ├── __init__.py
+│           ├── api/                 # FastAPI routes (Integration layer)
+│           ├── models/              # Pydantic models
+│           ├── services/            # Business logic services
+│           ├── core/                # Core functionality
+│           └── utils/               # Utility functions and helpers
 ├── tests/                           # Unit tests (mirrors src/ structure)
 ├── integration/                     # SEPARATE ROOT for integration tests
 ├── functional/                      # SEPARATE ROOT for functional/E2E tests
@@ -79,7 +80,7 @@ GITHUB_USERNAME="mingzilla"
   ▼
 [START DEVELOPMENT]
 
-* Legend: 
+* Legend:
   - "Give prompt-init.md & pyproject.toml to LLM" - Use prompt: 'generate file'
   - Optional: Skip LLM step by using the included extend_project_script.sh file
 ```
@@ -109,7 +110,7 @@ GITHUB_USERNAME="mingzilla"
    ```bash
    # If using LLM-generated script:
    ./extend_project.sh my-project
-   
+
    # OR if using included script:
    ./extend_project_script.sh my-project
    ```
@@ -126,7 +127,6 @@ GITHUB_USERNAME="mingzilla"
 ## Key Benefits
 
 - **Fast Environment Setup**: Uses UV's performance (8-10× faster than pip)
-- **Type-Safe**: All generated code passes `mypy --strict` checks
 - **Consistent Structure**: Follows the style guide recommendations
 - **Future-Proof**: Easy to update tool versions via LLM
 - **IDE-Ready**: Includes VSCode configuration

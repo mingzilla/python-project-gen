@@ -61,7 +61,7 @@ uv venv
 # Add dependencies using uv add command
 echo -e "${BLUE}Adding dependencies...${NC}"
 uv add pydantic
-uv add --dev pytest pytest-cov black isort build pre-commit
+uv add --dev pytest pytest-cov isort build pre-commit
 
 # Create source directory structure
 echo -e "${BLUE}Creating directory structure...${NC}"
@@ -152,17 +152,11 @@ packages = [
     "github_${GITHUB_USERNAME}.${PACKAGE_NAME}.utils",
 ]
 
-[tool.black]
-line-length = 999
-
 [tool.isort]
-profile = "black"
+profile = "google"
 line_length = 999
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
-import_heading_stdlib = "Standard Library"
-import_heading_thirdparty = "Third Party"
-import_heading_firstparty = "First Party"
-import_heading_localfolder = "Local"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY"]
+skip_glob = ["*.venv/*", "build/*", "dist/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "integration", "functional"]
@@ -189,7 +183,6 @@ cat > .vscode/settings.json << EOL
     "python.defaultInterpreterPath": "\${workspaceFolder}/.venv/bin/python",
     "python.analysis.extraPaths": ["\${workspaceFolder}/src"],
     "python.linting.enabled": true,
-    "python.formatting.provider": "black",
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
@@ -253,7 +246,6 @@ Python project created following Mingzilla's Python style guide.
 |------|---------|
 | Run tests | \`uv run -- pytest\` |
 | Run with coverage | \`uv run -- pytest --cov=src\` |
-| Format code | \`uv run -- black src tests integration functional\` |
 | Sort imports | \`uv run -- isort src tests integration functional\` |
 | Run pre-commit hooks | \`./run_pre-commit.sh\` |
 EOL
@@ -282,8 +274,7 @@ Generate a shell script (extend_project.sh) that will:
 
 ### .pre-commit-config.yaml
 Set up pre-commit hooks for:
-- Code formatting with black (line-length=999)
-- Import sorting with isort
+- Import sorting with isort (line-length=999)
 - Basic checks (trailing whitespace, YAML validity, etc.)
 
 ## Important Notes

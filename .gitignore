@@ -5,7 +5,7 @@ __pycache__/
 *.so
 .Python
 .env
-.venv/
+.venv*/
 env/
 venv/
 ENV/
@@ -19,7 +19,6 @@ build/
 
 # Editors
 .idea/
-.vscode/
 *.swp
 *.swo
 
@@ -29,3 +28,11 @@ build/
 # OS specific
 .DS_Store
 Thumbs.db
+
+### Combined Code ###
+*/temp/*code.md
+*/temp/*test.md
+/temp/*code.md
+/temp/*test.md
+
+command_line_error.txt
