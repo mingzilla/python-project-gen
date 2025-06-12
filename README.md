@@ -98,6 +98,7 @@ GITHUB_USERNAME="mingzilla"
      ```bash
      ./extend_project_script.sh my-project
      ```
+   - This creates `.pre-commit-config.yaml` and `install-hooks.sh`, and provides setup instructions
 
    **OR**
 
@@ -114,13 +115,14 @@ GITHUB_USERNAME="mingzilla"
    # OR if using included script:
    ./extend_project_script.sh my-project
    ```
-   This will create `.pre-commit-config.yaml` with appropriate versions.
+   This will create `.pre-commit-config.yaml` and `install-hooks.sh` helper script.
 
-4. **Set up pre-commit hooks**:
+4. **Install pre-commit hooks** (when ready):
    ```bash
    cd my-project
-   ./run_pre-commit.sh
+   ./install-hooks.sh    # Installs and activates pre-commit hooks
    ```
+   Note: The `extend_project_script.sh` creates this helper script for you.
 
 5. **Start developing your project!**
 

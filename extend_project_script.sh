@@ -28,6 +28,7 @@ cat > .pre-commit-config.yaml << 'EOF'
 # Lightweight pre-commit hooks configuration
 # Only essential formatting tools are enabled by default
 repos:
+# === LLM-UPDATABLE SECTION: PRE-COMMIT CORE HOOKS ===
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -38,13 +39,15 @@ repos:
         args: [--allow-multiple-documents]
     -   id: check-added-large-files
         args: ['--maxkb=1000']
+# === END LLM-UPDATABLE SECTION ===
 
-# Keep isort for automatic import sorting
+# === LLM-UPDATABLE SECTION: ISORT FORMATTING ===
 -   repo: https://github.com/pycqa/isort
     rev: 5.13.2
     hooks:
     -   id: isort
         args: [--profile=google, --line-length=999]
+# === END LLM-UPDATABLE SECTION ===
 EOF
 
 echo "Lightweight .pre-commit-config.yaml created successfully"

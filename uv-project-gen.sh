@@ -9,7 +9,7 @@ set -e  # Exit on error
 # Define variables for versions and configurations
 PYTHON_VERSION="3.11"
 SETUPTOOLS_VERSION="64.0.0"
-GITHUB_USERNAME="mingzilla"
+GITHUB_USERNAME="mingzilla"  # Change this to your GitHub username
 
 PROJECT_NAME=$1
 PACKAGE_NAME=$(echo $PROJECT_NAME | tr '-' '_')
@@ -60,8 +60,13 @@ uv venv
 
 # Add dependencies using uv add command
 echo -e "${BLUE}Adding dependencies...${NC}"
+# === LLM-UPDATABLE SECTION: CORE DEPENDENCIES ===
 uv add pydantic
+# === END LLM-UPDATABLE SECTION ===
+
+# === LLM-UPDATABLE SECTION: DEV DEPENDENCIES ===
 uv add --dev pytest pytest-cov isort build pre-commit
+# === END LLM-UPDATABLE SECTION ===
 
 # Create source directory structure
 echo -e "${BLUE}Creating directory structure...${NC}"
@@ -208,39 +213,11 @@ EOL
 chmod +x run_pre-commit.sh
 echo -e "${GREEN}Created run_pre-commit.sh script${NC}"
 
-# Create a README.md
+# Create a minimal README.md with just the command table
 cat > README.md << EOL
 # ${PROJECT_NAME}
 
-## Overview
-Python project created following Mingzilla's Python style guide.
-
-## Setup
-
-### Prerequisites
-- Python ${PYTHON_VERSION} or higher
-- [uv](https://github.com/astral-sh/uv) package manager
-
-### Installation
-
-1. Clone the repository:
-   \`\`\`bash
-   git clone https://github.com/${GITHUB_USERNAME}/${PROJECT_NAME}.git
-   cd ${PROJECT_NAME}
-   \`\`\`
-
-2. Create and activate virtual environment:
-   \`\`\`bash
-   uv venv
-   source .venv/bin/activate  # On Windows: .\.venv\Scripts\activate
-   \`\`\`
-
-3. Install dependencies:
-   \`\`\`bash
-   uv pip install -e .
-   \`\`\`
-
-## Development Workflow
+## Development Commands
 
 | Task | Command |
 |------|---------|
