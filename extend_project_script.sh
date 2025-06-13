@@ -41,12 +41,13 @@ repos:
         args: ['--maxkb=1000']
 # === END LLM-UPDATABLE SECTION ===
 
-# === LLM-UPDATABLE SECTION: ISORT FORMATTING ===
--   repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+# === LLM-UPDATABLE SECTION: RUFF LINTING AND FORMATTING ===
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.13
     hooks:
-    -   id: isort
-        args: [--profile=google, --line-length=999]
+    -   id: ruff
+        args: [--fix]
+    -   id: ruff-format
 # === END LLM-UPDATABLE SECTION ===
 EOF
 

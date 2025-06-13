@@ -65,7 +65,7 @@ uv add pydantic
 # === END LLM-UPDATABLE SECTION ===
 
 # === LLM-UPDATABLE SECTION: DEV DEPENDENCIES ===
-uv add --dev pytest pytest-cov isort build pre-commit
+uv add --dev pytest pytest-cov ruff build pre-commit
 # === END LLM-UPDATABLE SECTION ===
 
 # Create source directory structure
@@ -157,11 +157,17 @@ packages = [
     "github_${GITHUB_USERNAME}.${PACKAGE_NAME}.utils",
 ]
 
-[tool.isort]
-profile = "google"
-line_length = 999
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY"]
-skip_glob = ["*.venv/*", "build/*", "dist/*"]
+[tool.ruff]
+line-length = 999
+target-version = "py311"
+fix = true  # Auto-fix issues when possible
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["github_${GITHUB_USERNAME}"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "integration", "functional"]
@@ -223,7 +229,7 @@ cat > README.md << EOL
 |------|---------|
 | Run tests | \`uv run -- pytest\` |
 | Run with coverage | \`uv run -- pytest --cov=src\` |
-| Sort imports | \`uv run -- isort src tests integration functional\` |
+| Sort imports & format | \`uv run -- ruff check --fix . && uv run -- ruff format .\` |
 | Run pre-commit hooks | \`./run_pre-commit.sh\` |
 EOL
 
@@ -251,7 +257,7 @@ Generate a shell script (extend_project.sh) that will:
 
 ### .pre-commit-config.yaml
 Set up pre-commit hooks for:
-- Import sorting with isort (line-length=999)
+- Code linting, formatting, and import sorting with Ruff (line-length=999)
 - Basic checks (trailing whitespace, YAML validity, etc.)
 
 ## Important Notes

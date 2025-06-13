@@ -37,12 +37,12 @@ Create a fully self-contained script that works offline but includes clearly mar
 #### **2. LLM-Updatable Section Markers**
 ```bash
 # === LLM-UPDATABLE SECTION: DEPENDENCY VERSIONS ===
-uv add --dev pytest pytest-cov isort build pre-commit
+uv add --dev pytest pytest-cov ruff build pre-commit
 # === END LLM-UPDATABLE SECTION ===
 
 # === LLM-UPDATABLE SECTION: PRE-COMMIT TOOL VERSIONS ===
--   repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.13
 # === END LLM-UPDATABLE SECTION ===
 ```
 
@@ -61,7 +61,7 @@ uv add --dev pytest pytest-cov isort build pre-commit
 ### **What Gets Built Into Main Script**
 
 1. **Project Structure Creation** ✅ (already there)
-2. **Dependency Installation** ✅ (already there) 
+2. **Dependency Installation** ✅ (already there)
 3. **`.pre-commit-config.yaml` Generation** ⭐ NEW
 4. **`install-hooks.sh` Helper Script** ⭐ NEW
 5. **Basic Configuration Files** ⭐ NEW
@@ -101,7 +101,7 @@ If Plan A becomes problematic:
 #### **New Script Structure**
 ```bash
 # Current workflow remains until this point:
-uv add --dev pytest pytest-cov isort build pre-commit
+uv add --dev pytest pytest-cov ruff build pre-commit
 
 # NEW: Add configuration generation
 echo -e "${BLUE}Creating development configuration...${NC}"
