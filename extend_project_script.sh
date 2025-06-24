@@ -33,12 +33,14 @@ repos:
     rev: v4.5.0
     hooks:
     -   id: trailing-whitespace
+        exclude: '^docker-volumes/.*'
     -   id: end-of-file-fixer
-        exclude: '^.*\.(lock|min\.js|svg)$'
+        exclude: '^.*\.(lock|min\.js|svg)$|^docker-volumes/.*'
     -   id: check-yaml
         args: [--allow-multiple-documents]
     -   id: check-added-large-files
         args: ['--maxkb=1000']
+        exclude: '^docker-volumes/.*'
 # === END LLM-UPDATABLE SECTION ===
 
 # === LLM-UPDATABLE SECTION: RUFF LINTING AND FORMATTING ===
@@ -47,7 +49,9 @@ repos:
     hooks:
     -   id: ruff
         args: [--fix]
+        exclude: '^docker-volumes/.*'
     -   id: ruff-format
+        exclude: '^docker-volumes/.*'
 # === END LLM-UPDATABLE SECTION ===
 EOF
 

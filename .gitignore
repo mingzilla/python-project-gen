@@ -29,6 +29,9 @@ build/
 .DS_Store
 Thumbs.db
 
+# Docker volumes (contains binary model files)
+docker-volumes/
+
 ### Combined Code ###
 */temp/*code.md
 */temp/*test.md
@@ -36,3 +39,4 @@ Thumbs.db
 /temp/*test.md
 
 command_line_error.txt
+/coverage.xml
