@@ -144,6 +144,9 @@ requires-python = ">=${PYTHON_VERSION}"
 [project.optional-dependencies]
 dev = []  # Will be populated by uv add --dev
 
+[tool.uv]
+link-mode = "copy"
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = [
