@@ -41,7 +41,7 @@ project_root/
 You can modify these variables in the script to match your environment:
 
 ```bash
-PYTHON_VERSION="3.11"
+PYTHON_VERSION="3.13"
 SETUPTOOLS_VERSION="64.0.0"
 GITHUB_USERNAME="mingzilla"
 ```

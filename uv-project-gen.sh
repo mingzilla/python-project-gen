@@ -7,7 +7,7 @@
 set -e  # Exit on error
 
 # Define variables for versions and configurations
-PYTHON_VERSION="3.11"
+PYTHON_VERSION="3.13"
 SETUPTOOLS_VERSION="64.0.0"
 GITHUB_USERNAME="mingzilla"  # Change this to your GitHub username
 
