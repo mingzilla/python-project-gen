@@ -136,7 +136,7 @@ GITHUB_USERNAME="mingzilla"
 ## Requirements
 
 - [UV package manager](https://github.com/astral-sh/uv)
-- Python 3.11 or higher
+- Python 3.13 or higher
 - Bash shell
 
 ## License

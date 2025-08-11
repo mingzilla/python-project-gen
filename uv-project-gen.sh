@@ -56,7 +56,7 @@ fi
 
 # Create virtual environment
 echo -e "${BLUE}Creating virtual environment...${NC}"
-uv venv
+uv venv --python="python${PYTHON_VERSION}"
 
 # Add dependencies using uv add command
 echo -e "${BLUE}Adding dependencies...${NC}"
@@ -162,7 +162,7 @@ packages = [
 
 [tool.ruff]
 line-length = 999
-target-version = "py311"
+target-version = "py313"
 fix = true  # Auto-fix issues when possible
 
 [tool.ruff.lint]
